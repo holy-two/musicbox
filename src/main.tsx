@@ -2,6 +2,8 @@
 import { render } from 'solid-js/web';
 import 'abcjs/abcjs-audio.css';
 import App from './App';
+import "@unocss/reset/normalize.css"
+import 'uno.css'
 
 const root = document.getElementById('root');
 

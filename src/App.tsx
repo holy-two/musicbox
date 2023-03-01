@@ -8,6 +8,7 @@ const App: Component = () => {
   })
   return (
     <>
+      <div text-10 text-red scale-30>unocss test</div>
       <div id="paper">123</div>
     </>
   );
