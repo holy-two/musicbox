@@ -1,11 +1,8 @@
-import type { Accessor } from "solid-js";
-import { effect } from "solid-js/web";
+import { AccessorArray, createEffect, on, onCleanup } from "solid-js";
 
-export default function useEffect(effection: Parameters<typeof effect>[0], deps: Array<Accessor<unknown>>) {
-  return effect(() => {
-    for (const access of deps) {
-      access()
-    }
-    effection()
-  })
+export default function useEffect(effection: () => (() => void) | undefined, deps: AccessorArray<unknown>) {
+  return createEffect(on(deps, () => {
+    const cleanup = effection()
+    cleanup && onCleanup(cleanup)
+  }),)
 }
