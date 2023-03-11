@@ -1,16 +1,17 @@
 import { Component, createSignal, onMount } from 'solid-js';
-import ABCJS from "abcjs";
+import abcjs from "abcjs";
+import './index.scss'
 import CursorControl from './until/CursorControl';
 
 const ABCMusic: Component = () => {
-  const [visualArr, setVisualArr] = createSignal({} as ABCJS.TuneObjectArray)
-  const createSynth = new ABCJS.synth.CreateSynth();
+  const [visualArr, setVisualArr] = createSignal({} as abcjs.TuneObjectArray)
+  const createSynth = new abcjs.synth.CreateSynth();
   const audioParams = { chordsOff: true };
-  const cursorControl = new CursorControl();
-  const synthControl = new ABCJS.synth.SynthController();
+  const cursorControl = new CursorControl("#staff");
+  const synthControl = new abcjs.synth.SynthController();
 
   onMount(() => {
-    setVisualArr(ABCJS.renderAbc('staff', `X: 1
+    setVisualArr(abcjs.renderAbc('staff', `X: 1
 T: Cooley's
 M: 4/4
 L: 1/8

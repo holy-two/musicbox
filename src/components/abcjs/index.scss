@@ -1,5 +1,11 @@
 #staff{
-  width: 100vw;
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
+}
+line.abcjs-cursor {
+  color:rgb(255, 0, 200);
+}
+.highlight {
+  fill: rgb(255, 0, 200);
 }
