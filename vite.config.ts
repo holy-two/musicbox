@@ -4,6 +4,7 @@ import Uno from "unocss/vite"
 
 export default defineConfig({
   plugins: [Uno(), solidPlugin()],
+  base: "/musicbox/",
   server: {
     port: 3003,
   },
