@@ -1,10 +1,13 @@
-# [musicbox](https://github.com/holy-two/musicbox)
+# 八音盒
 
-### Library :
+## 运行
 
-1. **[solid](https://github.com/solidjs/solid)**
-2. **[abcjs](https://github.com/paulrosen/abcjs)**
+```bash
+pnpm i
+npx vite
+```
 
----
+## 借物
 
-*Thank them for their great help in this repo*
+* 曲库 https://github.com/holy-two/musicbox-papertape
+* 采样库 待定
