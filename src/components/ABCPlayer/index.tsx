@@ -3,7 +3,7 @@ import abcjs from "abcjs";
 import './index.scss'
 import CursorControl from './until/CursorControl';
 
-const ABCMusic: Component = () => {
+const ABCPlayer: Component = () => {
   const [visualArr, setVisualArr] = createSignal({} as abcjs.TuneObjectArray)
   const createSynth = new abcjs.synth.CreateSynth();
   const audioParams = { chordsOff: true };
@@ -58,4 +58,4 @@ K: F
   );
 };
 
-export default ABCMusic;
+export default ABCPlayer;
