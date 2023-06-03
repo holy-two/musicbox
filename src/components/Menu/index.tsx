@@ -23,10 +23,10 @@ const Tree = ({ treeOnclick, filesArr }) => {
 }
 
 
-const CustomMenu = (props: { files: [], onclick: (item: ListFile, i: number)=>void }) => {
+const CustomMenu = (props: { files: ListFile[], onclick: (item: ListFile, i: number) => void }) => {
   return (
     <div class="w-80 h-auto  bg-red-200 overflow-auto">
-      {props.files && <Tree filesArr={props.files} treeOnclick={(item: ListFile, i: number) => props.onclick(item, i)}></Tree>}
+      {props.files.length > 0 && <Tree filesArr={props.files} treeOnclick={(item: ListFile, i: number) => props.onclick(item, i)}></Tree>}
     </div>
   );
 };

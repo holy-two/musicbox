@@ -2,10 +2,10 @@ import { Component, createEffect, createSignal } from 'solid-js';
 import ABCPlayer from './components/Player';
 import CustomMenu from './components/Menu';
 import { ListFile, MusicFile, MusicList } from './type';
-import { useFetch } from './unitl/useFetch';
+import { useFetch } from './hooks/useFetch';
 
 const App: Component = () => {
-  const [filesData, setFilesData] = createSignal(null);
+  const [filesData, setFilesData] = createSignal<ListFile[]>([]);
   const [musicData, setMusicData] = createSignal(null);
   createEffect(() => {
     useFetch('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main').then((res: MusicList)=>{
@@ -29,7 +29,7 @@ const App: Component = () => {
 
   return <div class="flex justify-around w-full h-screen  overflow-hidden" >
     <CustomMenu onclick={(item, i) => handOnClick(item, i)} files={filesData()} />
-    <ABCPlayer musicData={musicData() }/>
+    {musicData() &&  <ABCPlayer musicData={musicData() }/>}
   </div>
 };
 
