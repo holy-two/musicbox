@@ -7,8 +7,12 @@ export default defineConfig({
   base: "/musicbox/",
   server: {
     port: 3003,
+    proxy: {
+      '/holy-two': 'https://ungh.cc/repos/holy-two'
+    },
   },
   build: {
     target: 'esnext',
   },
+  
 });

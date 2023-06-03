@@ -40,7 +40,7 @@ const CursorControl = function (selector: string) {
   }
 
   this.onEvent = function (event: NoteTimingEvent) {
-    if (event.measureStart && event.left === null)return; // this was the second part of a tie across a measure line. Just ignore it.
+    if (event.measureStart && event.left === null) return; // this was the second part of a tie across a measure line. Just ignore it.
 
     // 当前操作的音符
     const lastSelection = document.querySelectorAll(this.selector + " .highlight");
