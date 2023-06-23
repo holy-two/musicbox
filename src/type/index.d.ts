@@ -20,7 +20,7 @@ export interface MusicFile {
   file: MusicContents
 }
 
-export interface  MusicMeta {
+export interface MusicMeta {
   url: string
 }
 

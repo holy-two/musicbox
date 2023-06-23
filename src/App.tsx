@@ -17,7 +17,7 @@ const App = () => {
 
   const [musicData, {
     refetch
-  }] = useFetch<MusicFile, string>('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/docs/Air auf der G-Saite.abc', 'json', {
+  }] = useFetch<MusicFile, string>('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/docs/index.abc', 'json', {
     parseFn(from) {
       return from.file.contents
     },
@@ -26,12 +26,12 @@ const App = () => {
     }
   })
 
-  const handOnClick = (item: ListFile, i: number) => {
+  const handOnClick = (item: ListFile) => {
     refetch(`https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/${item.path}`)
   }
 
   return <div class="flex justify-around w-full h-screen  overflow-hidden" >
-    <CustomMenu onclick={(item, i) => handOnClick(item, i)} files={filesData()} />
+    <CustomMenu onclick={handOnClick} files={filesData()} />
     <Show when={!!musicData()}>
       <ABCPlayer musicData={musicData()} />
     </Show>
