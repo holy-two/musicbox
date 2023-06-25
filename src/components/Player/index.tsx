@@ -1,16 +1,25 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect } from 'solid-js';
 import abcjs from "abcjs";
-import CursorControl from './util/cursorControl';
+import CursorControl from './cursorControl';
 
-const ABCPlayer= ( props: { musicData: string }) => {
-  const play = (musicData: string)=>{
+
+const ABCPlayer = (props: { musicData: string }) => {
+
+  let staff: HTMLDivElement
+  let paper: HTMLDivElement
+
+
+  createEffect(async () => {
     const createSynth = new abcjs.synth.CreateSynth();
     const audioParams = { chordsOff: true };
-    const playControl = new CursorControl("#staff");
+    const playControl = new CursorControl(staff);
     const synthControl = new abcjs.synth.SynthController();
-    const visual = abcjs.renderAbc('staff', musicData, { scale: 1, clickListener: (e) => { console.log(e) } });
+    const visual = abcjs.renderAbc(staff, props.musicData, {
+      scale: 1,
+      clickListener: (e) => { console.log(e) }
+    });
     // 创建一个允许用户控制播放的可视化小部件
-    synthControl.load("#paper",
+    synthControl.load(paper,
       playControl,
       {
         displayLoop: true,
@@ -19,26 +28,20 @@ const ABCPlayer= ( props: { musicData: string }) => {
         displayProgress: true,
         displayWarp: true
       })
-  // 创建缓存和缓冲要播放的音频的对象
-  createSynth.init({ visualObj: visual[0] })
-    .then(() => {
-      synthControl.setTune(visual[0], false, audioParams)
-        .then(() => {
-        }).catch(error => {
-          console.warn("Audio problem:", error);
-        });
-    }).catch(error => {
+    // 创建缓存和缓冲要播放的音频的对象
+    try {
+      await createSynth.init({ visualObj: visual[0] });
+      await synthControl.setTune(visual[0], false, audioParams);
+    } catch (error) {
       console.warn("Audio problem:", error);
-    });
-}
-  createEffect(()=>{
-    play(props.musicData)
-  },[props.musicData])
+    }
+  })
+
 
   return (
     <div class='w-full overflow-y-scroll'>
-      <div id='staff' class='w-full h-full flex justify-around'  />
-      <div id="paper" class='mb-10' />
+      <div ref={staff} class='w-full h-full flex justify-around' />
+      <div ref={paper} class='mb-10' />
     </div>
   );
 };

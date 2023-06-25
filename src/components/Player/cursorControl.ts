@@ -1,25 +1,32 @@
 import { NoteTimingEvent } from "abcjs";
 
-function positionCursor(cursor: { setAttribute: (arg0: string, arg1: any) => void; }, x1: number, x2: number, y1: number, y2: number) {
-  console.log("positionCursor")
-  if (cursor) {
-    cursor.setAttribute("x1", x1);
-    cursor.setAttribute("x2", x2);
-    cursor.setAttribute("y1", y1);
-    cursor.setAttribute("y2", y2);
-  }
+
+function positionCursor(cursor: Element, x1: number, x2: number, y1: number, y2: number) {
+  cursor?.setAttribute?.("x1", x1.toString());
+  cursor?.setAttribute?.("x2", x2.toString());
+  cursor?.setAttribute?.("y1", y1.toString());
+  cursor?.setAttribute?.("y2", y2.toString());
 }
 
-const CursorControl = function (selector: string) {
-  this.selector = selector + " svg";
-  this.lastSvg = null;
-  this.beatSubdivisions = 2;
-  this.onReady = function () {
 
+class CursorControl {
+
+  staff: Element
+  lastSvg: SVGSVGElement | null
+  beatSubdivisions: 2
+
+
+  constructor(staff: Element) {
+    this.staff = staff;
+    this.lastSvg = null;
   }
 
-  this.onStart = function () {
-    const svgs = document.querySelectorAll(this.selector);
+
+  onReady() { }
+
+
+  onStart() {
+    const svgs = this.staff.querySelectorAll('svg');
     svgs.forEach(svg => {
       // 创建一个line元素
       if (!svg.querySelector(".abcjs-cursor")) {
@@ -35,15 +42,17 @@ const CursorControl = function (selector: string) {
     this.lastSvg = null;
   }
 
-  this.onBeat = function (beatNumber: number, totalBeats: number, totalTime: number) {
+
+  onBeat(beatNumber: number, totalBeats: number, totalTime: number) {
     console.log("Beat " + beatNumber + " is happening." + totalBeats + totalTime);
   }
 
-  this.onEvent = function (event: NoteTimingEvent) {
+
+  onEvent(event: NoteTimingEvent) {
     if (event.measureStart && event.left === null) return; // this was the second part of a tie across a measure line. Just ignore it.
 
     // 当前操作的音符
-    const lastSelection = document.querySelectorAll(this.selector + " .highlight");
+    const lastSelection = this.staff.querySelectorAll("svg .highlight");
     for (let k = 0; k < lastSelection.length; k++)
       lastSelection[k].classList.remove("highlight");
 
@@ -69,13 +78,17 @@ const CursorControl = function (selector: string) {
     positionCursor(cursor, event.left - 2, event.left - 2, event.top, event.top + event.height)
   }
 
-  this.onFinished = function () {
-    const els = document.querySelectorAll(this.selector + " .highlight");
+
+  onFinished() {
+    const els = this.staff.querySelectorAll("svg .highlight");
     for (let i = 0; i < els.length; i++) {
       els[i].classList.remove("highlight");
     }
-    const cursor = document.querySelector(this.selector + " .abcjs-cursor");
+    const cursor = this.staff.querySelector("svg .abcjs-cursor");
     positionCursor(cursor, 0, 0, 0, 0)
   }
+
 }
+
+
 export default CursorControl;

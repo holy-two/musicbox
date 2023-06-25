@@ -34,7 +34,7 @@ const CustomMenu = ((props: {
       <Show when={props.files.length > 0}>
         <For each={props.files}>
           {
-            (item, index) => <div style={{
+            item => <div style={{
               order: substringOf(item.path) === 'index' ? -1 : 1
             }} class="w-a h-6 b-purple-400 b-l-0 b-r-0 b-1.5 b-solid p-1.5 cursor-pointer hover:bg-blue-200"
               onClick={() => props.onclick(item)}
