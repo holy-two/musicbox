@@ -33,7 +33,7 @@ const App = () => {
   return <div class="flex justify-around w-full h-screen  overflow-hidden" >
     <CustomMenu onclick={handOnClick} files={filesData()} />
     <Show when={!!musicData()}>
-      <ABCPlayer musicData={musicData()} />
+      <ABCPlayer getMusicData={musicData} />
     </Show>
   </div>
 };
