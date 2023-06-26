@@ -1,5 +1,5 @@
-import { NoteTimingEvent } from "abcjs";
-
+import abcjs from "abcjs";
+import { Setter } from 'solid-js'
 
 function positionCursor(cursor: Element, x1: number, x2: number, y1: number, y2: number) {
   cursor?.setAttribute?.("x1", x1.toString());
@@ -9,20 +9,29 @@ function positionCursor(cursor: Element, x1: number, x2: number, y1: number, y2:
 }
 
 
-class CursorControl {
+class CursorControl implements abcjs.CursorControl {
 
   staff: Element
   lastSvg: SVGSVGElement | null
   beatSubdivisions: 2
+  setFlags: {
+    isReady?: Setter<Boolean>
+    isPlaying: Setter<Boolean>
+  }
 
-
-  constructor(staff: Element) {
+  constructor(staff: Element, setFlags: {
+    isReady?: Setter<Boolean>
+    isPlaying: Setter<Boolean>
+  }) {
     this.staff = staff;
     this.lastSvg = null;
+    this.setFlags = setFlags
   }
 
 
-  onReady() { }
+  onReady() {
+    this.setFlags.isReady?.(true)
+  }
 
 
   onStart() {
@@ -40,6 +49,7 @@ class CursorControl {
       }
     })
     this.lastSvg = null;
+    this.setFlags.isPlaying(true)
   }
 
 
@@ -48,7 +58,7 @@ class CursorControl {
   }
 
 
-  onEvent(event: NoteTimingEvent) {
+  onEvent(event: abcjs.NoteTimingEvent) {
     if (event.measureStart && event.left === null) return; // this was the second part of a tie across a measure line. Just ignore it.
 
     // 当前操作的音符
@@ -86,6 +96,8 @@ class CursorControl {
     }
     const cursor = this.staff.querySelector("svg .abcjs-cursor");
     positionCursor(cursor, 0, 0, 0, 0)
+
+    this.setFlags.isPlaying(false)
   }
 
 }
