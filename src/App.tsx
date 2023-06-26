@@ -1,6 +1,6 @@
 import ABCPlayer from './components/Player';
 import CustomMenu from './components/Menu';
-import { ListFile, MusicFile, MusicList } from './type';
+import { ListFile, MusicFile } from './type';
 import { useFetch } from './hooks/useFetch';
 import { Show } from 'solid-js';
 
@@ -33,7 +33,7 @@ const App = () => {
   return <div class="flex justify-around w-full h-screen  overflow-hidden" >
     <CustomMenu onclick={handOnClick} files={filesData()} />
     <Show when={!!musicData()}>
-      <ABCPlayer musicData={musicData()} />
+      <ABCPlayer getMusicData={musicData} />
     </Show>
   </div>
 };
