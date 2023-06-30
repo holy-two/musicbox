@@ -8,7 +8,7 @@ const App = () => {
 
   const [filesData] = useFetch<{ files: ListFile[] }, ListFile[]>('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main', 'json', {
     parseFn(from) {
-      return from.files.filter(item => item.path.includes('docs'))
+      return from.files.filter(item => item.path.includes('tapes'))
     },
     defaultValue() {
       return []
@@ -17,7 +17,7 @@ const App = () => {
 
   const [musicData, {
     refetch
-  }] = useFetch<MusicFile, string>('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/docs/index.abc', 'json', {
+  }] = useFetch<MusicFile, string>('https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/tapes/index.abc', 'json', {
     parseFn(from) {
       return from.file.contents
     },
