@@ -34,6 +34,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       scale: 1,
       clickListener: (e) => { console.log(e) }
     });
+    console.log(visual?.[0]?.getKeySignature?.());
     try {
       // 创建缓存和缓冲要播放的音频的对象
       await synth.init({ visualObj: visual[0] });
