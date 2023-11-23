@@ -15,13 +15,13 @@ class CursorControl implements abcjs.CursorControl {
   lastSvg: SVGSVGElement | null
   beatSubdivisions: 2
   setFlags: {
-    isReady?: Setter<Boolean>
-    isPlaying: Setter<Boolean>
+    isReady?: Setter<boolean>
+    isPlaying: Setter<boolean>
   }
 
   constructor(staff: Element, setFlags: {
-    isReady?: Setter<Boolean>
-    isPlaying: Setter<Boolean>
+    isReady?: Setter<boolean>
+    isPlaying: Setter<boolean>
   }) {
     this.staff = staff;
     this.lastSvg = null;
