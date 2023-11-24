@@ -1,50 +1,38 @@
-import { Show, For } from "solid-js";
+import { Show, For, createSignal } from "solid-js";
 import { ListFile } from "../../type";
 
 
-const substringOf = (resource: string) => [resource.indexOf('/') + 1, resource.indexOf('.')]
-  .reduce((acc, n, index) => {
-    if (index == 0) {
-      acc.start = n
-      return acc
-    }
-    if (index == 1) {
-      acc.end = n
-      return acc
-    }
-    return acc
-  }, {
-    start: 0,
-    end: resource.length,
-    get result() {
-      const { start, end } = this
-      if (start > 0 && end > 0) {
-        return resource.substring(this.start, this.end)
-      }
-      return ''
-    }
-  }).result
+const getFileName = (path: string) => path.match(/\/(.*?).abc$/)?.at(-1)
+const [getCurrentName, setCurrentName] = createSignal<string>("index")
 
 const CustomMenu = ((props: {
   files: ListFile[],
   onclick: (item: ListFile) => void
 }) => {
   return (
-    <div class="flex flex-col w-80 h-auto bg-red-200 overflow-auto">
-      <Show when={props.files.length > 0}>
+    <Show when={props.files.length > 0}>
+      <ul class="na-menu">
         <For each={props.files}>
           {
-            item => <div style={{
-              order: substringOf(item.path) === 'index' ? -1 : 1
-            }} class="w-a h-6 b-purple-400 b-l-0 b-r-0 b-1.5 b-solid p-1.5 cursor-pointer hover:bg-blue-200"
-              onClick={() => props.onclick(item)}
+            item => <li
+              class="na-menu-item cursor-pointer"
+              style={{ order: getFileName(item.path) === 'index' ? -1 : 1 }}
+
+              {...(getFileName(item.path) === getCurrentName() ? {
+                'data-selected': ""
+              } : {})}
+
+              onClick={() => {
+                setCurrentName(getFileName(item.path))
+                props.onclick(item)
+              }}
             >
-              {substringOf(item.path)}
-            </div>
+              {getFileName(item.path)}
+            </li>
           }
         </For>
-      </Show>
-    </div>
+      </ul>
+    </Show>
   );
 });
 

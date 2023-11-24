@@ -16,7 +16,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
    */
   const [getIsPlaying, setIsPlaying] = createSignal(false);
 
-  createEffect(on(props.getMusicData, async (musicData) => { 
+  createEffect(on(props.getMusicData, async (musicData) => {
     // 暂停上一个
     control?.pause?.(); // synth.stop();
     /**
@@ -30,11 +30,18 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       displayPlay: true,
       displayProgress: true,
     });
-    const visual = abcjs.renderAbc(staff, musicData, {
-      scale: 1,
-      clickListener: (e) => { console.log(e) }
-    });
+
+    const visual = abcjs.renderAbc(
+      staff,
+      musicData, //.replace(/^\|(?=\s*$)/m, ''),
+      {
+        scale: 1,
+        clickListener: (e) => { console.log(e) }
+      }
+    );
+
     console.log(visual?.[0]?.getKeySignature?.());
+
     try {
       // 创建缓存和缓冲要播放的音频的对象
       await synth.init({ visualObj: visual[0] });
@@ -51,15 +58,15 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
   const handleButtonClick = () => control.play()
 
 
-  return (
-    <div class='w-full overflow-y-scroll'>
-      <button onClick={handleButtonClick}>{
+  return <>
+    {/*<button onClick={handleButtonClick}>{
         getIsPlaying() ? '⏸' : '⏯️' // ▶️
-      }</button>
-      <div ref={staff} class='w-full h-full flex justify-around' />
-      <div ref={paper} class='mb-10' />
-    </div>
-  );
+      }</button>*/}
+    <main class="na-layout-content">
+      <div ref={staff} class="flex justify-around" />
+    </main>
+    <footer ref={paper} class="na-layout-footer" />
+  </>;
 };
 
 export default ABCPlayer;

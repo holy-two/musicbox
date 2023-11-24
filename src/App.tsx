@@ -30,12 +30,16 @@ const App = () => {
     refetch(`https://ungh.cc/repos/holy-two/musicbox-papertape/files/main/${item.path}`)
   }
 
-  return <div class="flex justify-around w-full h-screen  overflow-hidden" >
-    <CustomMenu onclick={handOnClick} files={filesData()} />
-    <Show when={!!musicData()}>
-      <ABCPlayer getMusicData={musicData} />
-    </Show>
-  </div>
+  return <>
+    <aside class="na-layout-aside pt-1em">
+      <CustomMenu onclick={handOnClick} files={filesData()} />
+    </aside>
+    <section class="na-layout">
+      <Show when={!!musicData()}>
+        <ABCPlayer getMusicData={musicData} />
+      </Show>
+    </section>
+  </>
 };
 
 export default App;
