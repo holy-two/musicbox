@@ -102,5 +102,4 @@ class CursorControl implements abcjs.CursorControl {
 
 }
 
-
 export default CursorControl;

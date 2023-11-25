@@ -34,11 +34,9 @@ const App = () => {
     <aside class="na-layout-aside pt-1em">
       <CustomMenu onclick={handOnClick} files={filesData()} />
     </aside>
-    <section class="na-layout">
-      <Show when={!!musicData()}>
-        <ABCPlayer getMusicData={musicData} />
-      </Show>
-    </section>
+    <Show when={!!musicData()}>
+      <ABCPlayer getMusicData={musicData} />
+    </Show>
   </>
 };
 

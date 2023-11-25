@@ -9,8 +9,8 @@ dependencies:
     specifier: ^6.2.3
     version: 6.2.3
   nanarinostyl:
-    specifier: ^0.2.0
-    version: 0.2.0
+    specifier: ^0.2.1
+    version: 0.2.1
   solid-js:
     specifier: ^1.8.6
     version: 1.8.6
@@ -958,7 +958,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001564
-      electron-to-chromium: 1.4.592
+      electron-to-chromium: 1.4.594
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.22.1)
     dev: true
@@ -1065,8 +1065,8 @@ packages:
     resolution: {integrity: sha512-jtD6YG370ZCIi/9GTaJKQxWTZD045+4R4hTk/x1UyoqadyJ9x9CgSi1RlVDQF8U2sxLLSnFkCaMihqljHIWgMg==}
     dev: true
 
-  /electron-to-chromium@1.4.592:
-    resolution: {integrity: sha512-D3NOkROIlF+d5ixnz7pAf3Lu/AuWpd6AYgI9O67GQXMXTcCP1gJQRotOq35eQy5Sb4hez33XH1YdTtILA7Udww==}
+  /electron-to-chromium@1.4.594:
+    resolution: {integrity: sha512-xT1HVAu5xFn7bDfkjGQi9dNpMqGchUkebwf1GL7cZN32NSwwlHRPMSDJ1KN6HkS0bWUtndbSQZqvpQftKG2uFQ==}
     dev: true
 
   /esbuild@0.18.20:
@@ -1389,8 +1389,8 @@ packages:
   /ms@2.1.2:
     resolution: {integrity: sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==}
 
-  /nanarinostyl@0.2.0:
-    resolution: {integrity: sha512-3Pvfzovatm0IX0ij++6bjBiQl4gZXZlRbO3J04/AoVtsVNUfRHyMKJ+1O+i2aggMpSq2PfMJ663U5LiF28gErw==}
+  /nanarinostyl@0.2.1:
+    resolution: {integrity: sha512-wbSrWrPhBFchrZyVNHKB22jSbcJftlnfLjeLsmzKLHaOvBo38LRTnCKX8Iquhw+2y6xMrpVHXnTCti9YjHKVUw==}
     dependencies:
       stylus: 0.59.0
     transitivePeerDependencies:

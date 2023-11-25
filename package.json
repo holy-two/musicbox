@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "abcjs": "^6.2.3",
-    "nanarinostyl": "^0.2.0",
+    "nanarinostyl": "^0.2.1",
     "solid-js": "^1.8.6"
   }
 }

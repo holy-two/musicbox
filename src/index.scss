@@ -1,18 +1,10 @@
 @import url('nanarinostyl');
 
-line.abcjs-cursor {
-  color: rgb(var(--primary-6));
-}
-
-.highlight {
-  fill: rgb(var(--primary-6));
-}
-
 body {
   overflow: hidden;
   margin: 0;
 
-  --width-aside: 240px;
+  --width-aside: 254px;
 }
 
 #root {

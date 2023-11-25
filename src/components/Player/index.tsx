@@ -1,14 +1,15 @@
 import { Accessor, createEffect, on, createSignal } from 'solid-js';
 import abcjs from "abcjs";
 import CursorControl from './cursorControl';
-
+import SynthController from './synthController';
+import "./index.scss";
 
 const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
 
   let staff: HTMLDivElement;
   let paper: HTMLDivElement;
   const synth = new abcjs.synth.CreateSynth();
-  let playControl: CursorControl;
+  let playControl: abcjs.CursorControl;
   let control: abcjs.SynthObjectController;
 
   /**
@@ -21,15 +22,20 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
     control?.pause?.(); // synth.stop();
     /**
      * 创建一个允许用户控制播放的可视化小部件
-     * 需要暂停可见control变量内部有无法释放的引用 可以用缓存？`Map<musicData, control>.get(musicData)`
+     * 可视化小部件DOM不变故而只需要new一次
      */
-    control = new abcjs.synth.SynthController();
+    control = new SynthController();
     control.load(paper, playControl ??= new CursorControl(staff, {
       isPlaying: setIsPlaying
     }), {
       displayPlay: true,
       displayProgress: true,
     });
+
+    /*Reflect.set(control.pro, "randomAccess", async function (ev: Event) {
+      console.log(randomAccess);
+    })*/
+    console.log(control);
 
     const visual = abcjs.renderAbc(
       staff,
@@ -55,18 +61,16 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
     }
   }))
 
-  const handleButtonClick = () => control.play()
+  // const handleButtonClick = () => control.play()
 
 
-  return <>
+  return <section class="na-layout overflow-x-hidden overflow-y-auto relative">
     {/*<button onClick={handleButtonClick}>{
         getIsPlaying() ? '⏸' : '⏯️' // ▶️
       }</button>*/}
-    <main class="na-layout-content">
-      <div ref={staff} class="flex justify-around" />
-    </main>
-    <footer ref={paper} class="na-layout-footer" />
-  </>;
+    <main ref={staff} class="na-layout-content flex justify-around overflow-unset!" />
+    <footer ref={paper} class="na-layout-footer bottom-0 sticky" />
+  </section>;
 };
 
 export default ABCPlayer;
