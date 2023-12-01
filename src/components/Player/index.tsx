@@ -31,12 +31,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       displayPlay: true,
       displayProgress: true,
     });
-
-    /*Reflect.set(control.pro, "randomAccess", async function (ev: Event) {
-      console.log(randomAccess);
-    })*/
-    console.log(control);
-
+    
     const visual = abcjs.renderAbc(
       staff,
       musicData, //.replace(/^\|(?=\s*$)/m, ''),

@@ -1,5 +1,6 @@
 import ABCPlayer from './components/Player';
 import CustomMenu from './components/Menu';
+import ThemeToggle from './components/ThemeToggle';
 import { ListFile, MusicFile } from './type';
 import { useFetch } from './hooks/useFetch';
 import { Show } from 'solid-js';
@@ -31,8 +32,9 @@ const App = () => {
   }
 
   return <>
-    <aside class="na-layout-aside pt-1em">
+    <aside class="na-layout-aside na-watermark pt-1em">
       <CustomMenu onclick={handOnClick} files={filesData()} />
+      <ThemeToggle />
     </aside>
     <Show when={!!musicData()}>
       <ABCPlayer getMusicData={musicData} />
