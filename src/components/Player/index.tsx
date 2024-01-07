@@ -31,13 +31,12 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       displayPlay: true,
       displayProgress: true,
     });
-    
     const visual = abcjs.renderAbc(
       staff,
       musicData, //.replace(/^\|(?=\s*$)/m, ''),
       {
         scale: 1,
-        clickListener: (e) => { console.log(e) }
+        clickListener: (e) => abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
       }
     );
 
