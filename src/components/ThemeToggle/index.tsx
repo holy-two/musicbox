@@ -10,6 +10,7 @@ export default (() => {
         id="themeToggle"
         class="na-button"
         innerHTML={moon + sun}
+        title="theme toggle"
         onclick={() => {
             const theme = themeTuple.at(themeTuple.indexOf(window.theme) - 1);
             document.documentElement.dataset["theme"] = theme;

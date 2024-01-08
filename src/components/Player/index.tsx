@@ -1,7 +1,9 @@
 import { Accessor, createEffect, on, createSignal } from 'solid-js';
+import message from './../Message';
 import abcjs from "abcjs";
 import CursorControl from './cursorControl';
 import SynthController from './synthController';
+import { name, key } from "./../../utils"
 import "./index.scss";
 
 const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
@@ -36,13 +38,19 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       musicData, //.replace(/^\|(?=\s*$)/m, ''),
       {
         scale: 1,
-        clickListener: (e) => abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
+        clickListener: (e) => {
+          if(e.rest) return
+          abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
+          for (const pitch of e.midiPitches) {
+            message(name(pitch));
+          }
+        }
       }
     );
-
-    console.log(visual?.[0]?.getKeySignature?.());
-
+    
     try {
+      const KEY = key(visual?.[0]?.getKeySignature?.());
+      console.info(`谱号为：${KEY}调`);
       // 创建缓存和缓冲要播放的音频的对象
       await synth.init({ visualObj: visual[0] });
       await control.setTune(visual[0], false, {
@@ -53,6 +61,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
     } catch (error) {
       console.warn("Audio problem:", error);
     }
+    
   }))
 
   // const handleButtonClick = () => control.play()

@@ -6,6 +6,10 @@ line.abcjs-cursor {
   fill: rgb(var(--primary-6));
 }
 
+.abcjs-note_selected{
+  fill: rgb(var(--primary-6)) !important;
+}
+
 .abcjs-inline-audio {
   background-color: transparent;
   overflow: hidden;
@@ -58,4 +62,5 @@ line.abcjs-cursor {
   .abcjs-pushed~.abcjs-midi-clock {
     color: rgb(var(--primary-6))
   }
+
 }
