@@ -11,15 +11,15 @@
   "devDependencies": {
     "@unocss/preset-attributify": "^0.50.8",
     "@unocss/reset": "^0.50.8",
-    "sass": "^1.69.5",
+    "sass": "^1.69.7",
     "typescript": "^4.9.5",
     "unocss": "^0.50.8",
-    "vite": "^4.5.0",
-    "vite-plugin-solid": "^2.7.2"
+    "vite": "^4.5.1",
+    "vite-plugin-solid": "^2.8.0"
   },
   "dependencies": {
     "abcjs": "^6.2.3",
-    "nanarinostyl": "^0.2.2",
-    "solid-js": "^1.8.6"
+    "nanarinostyl": "^0.2.7",
+    "solid-js": "^1.8.10"
   }
 }
