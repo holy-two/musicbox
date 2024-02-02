@@ -9,17 +9,17 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@unocss/preset-attributify": "^0.50.8",
-    "@unocss/reset": "^0.50.8",
-    "sass": "^1.69.7",
+    "@unocss/preset-attributify": "^0.58.3",
+    "@unocss/reset": "^0.58.3",
+    "sass": "^1.70.0",
     "typescript": "^4.9.5",
-    "unocss": "^0.50.8",
-    "vite": "^4.5.1",
+    "unocss": "^0.58.3",
+    "vite": "^4.5.2",
     "vite-plugin-solid": "^2.8.0"
   },
   "dependencies": {
     "abcjs": "^6.2.3",
-    "nanarinostyl": "^0.2.7",
+    "nanarinostyl": "^0.2.11",
     "solid-js": "^1.8.10"
   }
 }

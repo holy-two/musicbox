@@ -6,7 +6,6 @@ import { useFetch } from './hooks/useFetch';
 import { Show } from 'solid-js';
 
 const App = () => {
-  console.log(import.meta.env);
   
   const [filesData] = useFetch<{ files: ListFile[] }, ListFile[]>(
     import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL,

@@ -6,7 +6,7 @@ line.abcjs-cursor {
   fill: rgb(var(--primary-6));
 }
 
-.abcjs-note_selected{
+.abcjs-note_selected {
   fill: rgb(var(--primary-6)) !important;
 }
 
@@ -15,7 +15,6 @@ line.abcjs-cursor {
   overflow: hidden;
 
   .abcjs-btn {
-
     g {
       fill: rgb(var(--primary-6));
       stroke: rgb(var(--primary-6));
@@ -26,7 +25,6 @@ line.abcjs-cursor {
     }
 
     &:hover {
-
       g {
         fill: rgb(var(--primary-4));
         stroke: rgb(var(--primary-4));
@@ -56,11 +54,10 @@ line.abcjs-cursor {
   }
 
   .abcjs-midi-clock {
-    color: rgb(var(--gray-9))
+    color: rgb(var(--gray-9));
   }
 
-  .abcjs-pushed~.abcjs-midi-clock {
-    color: rgb(var(--primary-6))
+  .abcjs-pushed ~ .abcjs-midi-clock {
+    color: rgb(var(--primary-6));
   }
-
 }

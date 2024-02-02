@@ -1,29 +1,28 @@
 export interface MusicList {
-  meta: ListMeta
-  files: ListFile[]
+  meta: ListMeta;
+  files: ListFile[];
 }
 
 interface ListMeta {
-  sha: string
+  sha: string;
 }
 
 export interface ListFile {
-  path: string
-  mode: string
-  sha: string
-  size: number
+  path: string;
+  mode: string;
+  sha: string;
+  size: number;
 }
 
-
 export interface MusicFile {
-  meta: MusicMeta
-  file: MusicContents
+  meta: MusicMeta;
+  file: MusicContents;
 }
 
 export interface MusicMeta {
-  url: string
+  url: string;
 }
 
 export interface MusicContents {
-  contents: string
+  contents: string;
 }
