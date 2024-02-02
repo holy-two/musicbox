@@ -11,14 +11,13 @@
         get: () =>
           localStorage.getItem("theme") ??
           ["dark", "light"][
-              +!window.matchMedia?.("(prefers-color-scheme: dark)")
-                  ?.matches
+            +!window.matchMedia?.("(prefers-color-scheme: dark)")?.matches
           ],
       });
       document.documentElement.dataset["theme"] = window.theme;
     </script>
-    <script type="module" crossorigin src="/musicbox/assets/index-48e919ff.js"></script>
-    <link rel="stylesheet" href="/musicbox/assets/index-80a19057.css">
+    <script type="module" crossorigin src="/musicbox/assets/index-12615bb8.js"></script>
+    <link rel="stylesheet" href="/musicbox/assets/index-b2111721.css">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
