@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@astropub/config-to-alias": "^1.0.1",
     "@unocss/preset-attributify": "^0.58.3",
     "@unocss/reset": "^0.58.3",
     "sass": "^1.70.0",

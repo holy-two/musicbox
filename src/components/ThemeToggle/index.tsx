@@ -1,6 +1,6 @@
 import type { Component } from "solid-js";
-import moon from "./../../assets/moon.svg?raw";
-import sun from "./../../assets/sun.svg?raw";
+import moon from "𝄞/assets/moon.svg?raw";
+import sun from "𝄞/assets/sun.svg?raw";
 import "./index.scss";
 
 const themeTuple = ["dark", "light"] as const;

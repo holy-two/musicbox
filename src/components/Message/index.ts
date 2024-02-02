@@ -1,4 +1,4 @@
-import { sleep } from "./../../utils";
+import { sleep } from "𝄞/utils";
 
 export class Launcher {
   private queue: HTMLDivElement;

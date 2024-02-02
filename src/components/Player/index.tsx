@@ -1,9 +1,9 @@
 import { Accessor, createEffect, on, createSignal } from "solid-js";
-import message from "./../Message";
+import message from "𝄞/components/Message";
 import abcjs from "abcjs";
 import CursorControl from "./cursorControl";
 import SynthController from "./synthController";
-import { name, key } from "./../../utils";
+import { name, key } from "𝄞/utils";
 import "./index.scss";
 
 const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {

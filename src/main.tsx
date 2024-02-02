@@ -1,10 +1,10 @@
 /* @refresh reload */
 import { render } from "solid-js/web";
 import "abcjs/abcjs-audio.css";
-import App from "./App";
+import App from "𝄞/App";
 import "@unocss/reset/normalize.css";
 import "uno.css";
-import "./index.scss";
+import "𝄞/index.scss";
 
 const root = document.getElementById("root");
 
