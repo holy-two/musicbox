@@ -1,8 +1,8 @@
 import { defineConfig } from "vite";
 import solid from "vite-plugin-solid";
 import uno from "unocss/vite";
-import alias from '@astropub/config-to-alias/vite';
+import vitePluginAlias from "@holy-two/vite-plugin-alias";
 
 export default defineConfig({
-  plugins: [uno(), solid(), alias()],
+  plugins: [uno(), solid(), vitePluginAlias()],
 });
