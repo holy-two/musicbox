@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -19,6 +19,9 @@ devDependencies:
   '@astropub/config-to-alias':
     specifier: ^1.0.1
     version: 1.0.1(vite@4.5.2)
+  '@holy-two/vite-plugin-alias':
+    specifier: 0.0.2
+    version: 0.0.2(vite@4.5.2)
   '@unocss/preset-attributify':
     specifier: ^0.58.3
     version: 0.58.3
@@ -589,6 +592,17 @@ packages:
     dev: true
     optional: true
 
+  /@holy-two/vite-plugin-alias@0.0.2(vite@4.5.2):
+    resolution: {integrity: sha512-rSl0MfS2bcfUIHyJhdr/3xNwtBMpUcfABpUYo3/7qR//RaQvj9zAcV0tT7IH/tswNRvpY/5cF5jjFls+kyv44Q==}
+    engines: {node: '>=18.x'}
+    peerDependencies:
+      vite: '>=4.0.0'
+    dependencies:
+      '@types/node': 20.11.16
+      jsonc-parser: 3.2.1
+      vite: 4.5.2(sass@1.70.0)
+    dev: true
+
   /@iconify/types@2.0.0:
     resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
     dev: true
@@ -710,6 +724,12 @@ packages:
 
   /@types/json5@0.0.30:
     resolution: {integrity: sha512-sqm9g7mHlPY/43fcSNrCYfOeX9zkTTK+euO5E6+CVijSMm5tTjkVdwdqRkY3ljjIAf8679vps5jKUoJBCLsMDA==}
+    dev: true
+
+  /@types/node@20.11.16:
+    resolution: {integrity: sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==}
+    dependencies:
+      undici-types: 5.26.5
     dev: true
 
   /@types/resolve@1.20.6:
@@ -1706,6 +1726,10 @@ packages:
       defu: 6.1.4
       jiti: 1.21.0
       mlly: 1.5.0
+    dev: true
+
+  /undici-types@5.26.5:
+    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
     dev: true
 
   /unocss@0.58.3(postcss@8.4.33)(vite@4.5.2):
