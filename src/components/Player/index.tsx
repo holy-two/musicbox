@@ -42,12 +42,11 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
         musicData, //.replace(/^\|(?=\s*$)/m, ''),
         {
           scale: 1,
-          clickListener: (e) => {
+          clickListener: (e, t, c, a, d, event?: MouseEvent | TouchEvent) => {
+            if (event.type !== "mouseup") return;
             if (e.rest) return;
             abcjs.synth.playEvent(e.midiPitches, undefined, 1000);
-            for (const pitch of e.midiPitches) {
-              message(name(pitch));
-            }
+            e.midiPitches?.forEach?.((pitch) => message(name(pitch)));
           },
         }
       );
