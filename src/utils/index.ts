@@ -28,7 +28,7 @@ export function name(p: AbcElem["midiPitches"][number]) {
 }
 
 /**
- * 获取谱号 默认大调无后缀 小调后缀m 其他为古典调式
+ * 获取调号 默认大调无后缀 小调后缀m 其他为古典调式
  */
 export function key(k: KeySignature) {
   return `${k.root}${k.mode}`;
