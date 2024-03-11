@@ -16,7 +16,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
   /**
    * 是否暂停播放
    */
-  const [getIsPlaying, setIsPlaying] = createSignal(false);
+  const isPlaying = createSignal(false);
 
   createEffect(
     on(props.getMusicData, async (musicData) => {
@@ -30,7 +30,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       control.load(
         paper,
         (playControl ??= new CursorControl(staff, {
-          isPlaying: setIsPlaying,
+          isPlaying,
         })),
         {
           displayPlay: true,
@@ -58,7 +58,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
         await synth.init({ visualObj: visual[0] });
         await control.setTune(visual[0], false, {
           chordsOff: true,
-          onEnded: () => setIsPlaying(false),
+          // onEnded: () => {},
         });
         // await synth.prime();
       } catch (error) {
@@ -67,13 +67,15 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
     })
   );
 
-  // const handleButtonClick = () => control.play()
+  // const handleButtonClick = () => control.play();
 
   return (
     <section class="na-layout overflow-x-hidden overflow-y-auto relative">
-      {/*<button onClick={handleButtonClick}>{
-        getIsPlaying() ? '⏸' : '⏯️' // ▶️
-      }</button>*/}
+      {/*
+        <button onClick={handleButtonClick}>
+          {isPlaying[0]() ? '⏸' : '⏯️' // ▶️}
+        </button>
+      */}
       <main
         ref={staff}
         class="na-layout-content flex justify-around overflow-unset!"

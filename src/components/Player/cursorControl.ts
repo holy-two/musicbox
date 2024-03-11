@@ -1,5 +1,5 @@
 import abcjs from "abcjs";
-import { Setter } from "solid-js";
+import { Signal } from "solid-js";
 
 function positionCursor(
   cursor: Element,
@@ -18,25 +18,20 @@ class CursorControl implements abcjs.CursorControl {
   staff: Element;
   lastSvg: SVGSVGElement | null;
   beatSubdivisions: 2;
-  setFlags: {
-    isReady?: Setter<boolean>;
-    isPlaying: Setter<boolean>;
-  };
+  isPlaying: boolean;
 
   constructor(
     staff: Element,
-    setFlags: {
-      isReady?: Setter<boolean>;
-      isPlaying: Setter<boolean>;
+    flags: {
+      isPlaying: Signal<boolean>;
     }
   ) {
     this.staff = staff;
     this.lastSvg = null;
-    this.setFlags = setFlags;
-  }
-
-  onReady() {
-    this.setFlags.isReady?.(true);
+    Object.defineProperty(this, "isPlaying", {
+      get: flags.isPlaying[0],
+      set: flags.isPlaying[1],
+    });
   }
 
   onStart() {
@@ -57,13 +52,7 @@ class CursorControl implements abcjs.CursorControl {
       }
     });
     this.lastSvg = null;
-    this.setFlags.isPlaying(true);
-  }
-
-  onBeat(beatNumber: number, totalBeats: number, totalTime: number) {
-    console.log(
-      "Beat " + beatNumber + " is happening." + totalBeats + totalTime
-    );
+    this.isPlaying = true;
   }
 
   onEvent(event: abcjs.NoteTimingEvent) {
@@ -82,20 +71,13 @@ class CursorControl implements abcjs.CursorControl {
     }
 
     // 当前播放音符前的标记
-    if (
-      !(
-        event.elements &&
-        event.elements.length > 0 &&
-        event.elements[0].length > 0
-      )
-    )
-      return;
+    if (!event.elements?.[0].length) return;
+
     const svg = event.elements[0][0].closest("svg");
     if (this.lastSvg === null) {
       this.lastSvg = svg;
     } else {
       if (
-        this.lastSvg.parentElement &&
         this.lastSvg.parentElement.offsetTop !== svg.parentElement.offsetTop
       ) {
         positionCursor(this.lastSvg.querySelector(".abcjs-cursor"), 0, 0, 0, 0);
@@ -119,8 +101,7 @@ class CursorControl implements abcjs.CursorControl {
     }
     const cursor = this.staff.querySelector("svg .abcjs-cursor");
     positionCursor(cursor, 0, 0, 0, 0);
-
-    this.setFlags.isPlaying(false);
+    this.isPlaying = false;
   }
 }
 
