@@ -1,7 +1,7 @@
 import ABCPlayer from '𝄞/components/Player';
 import CustomMenu from '𝄞/components/Menu';
 import ThemeToggle from '𝄞/components/ThemeToggle';
-import { ListFile, MusicFile } from '𝄞/type';
+import { ListFile, MusicFile } from '𝄞/types';
 import { useFetch } from '𝄞/hooks/useFetch';
 import { Show } from 'solid-js';
 

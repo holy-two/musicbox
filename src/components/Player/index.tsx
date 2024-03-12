@@ -1,8 +1,7 @@
-import { Accessor, createEffect, on, createSignal } from "solid-js";
+import { Accessor, createEffect, on } from "solid-js";
 import message from "𝄞/components/Message";
 import abcjs from "abcjs";
-import CursorControl from "./cursorControl";
-// import SynthController from "./synthController";
+import CursorControl from "./control";
 import { name, key } from "𝄞/utils";
 import "./index.scss";
 
@@ -10,33 +9,22 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
   let staff: HTMLDivElement;
   let paper: HTMLDivElement;
   const synth = new abcjs.synth.CreateSynth();
-  let playControl: abcjs.CursorControl;
-  let control: abcjs.SynthObjectController;
-
-  /**
-   * 是否暂停播放
-   */
-  const isPlaying = createSignal(false);
+  let cursorControl: abcjs.CursorControl;
+  let synthControl: abcjs.SynthObjectController;
 
   createEffect(
     on(props.getMusicData, async (musicData) => {
       // 暂停上一个
-      control?.pause?.(); // synth.stop();
+      synthControl?.pause?.(); // synth.stop();
       /**
        * 创建一个允许用户控制播放的可视化小部件
        * 可视化小部件DOM不变故而只需要new一次
        */
-      control = new abcjs.synth.SynthController();
-      control.load(
-        paper,
-        (playControl ??= new CursorControl(staff, {
-          isPlaying,
-        })),
-        {
-          displayPlay: true,
-          displayProgress: true,
-        }
-      );
+      synthControl = new abcjs.synth.SynthController();
+      synthControl.load(paper, (cursorControl ??= new CursorControl(staff)), {
+        displayPlay: true,
+        displayProgress: true,
+      });
       const visual = abcjs.renderAbc(
         staff,
         musicData, //.replace(/^\|(?=\s*$)/m, ''),
@@ -56,9 +44,9 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
         console.info(key(keySignature), keySignature);
         // 创建缓存和缓冲要播放的音频的对象
         await synth.init({ visualObj: visual[0] });
-        await control.setTune(visual[0], false, {
+        await synthControl.setTune(visual[0], false, {
           chordsOff: true,
-          // onEnded: () => {},
+          onEnded: () => {},
         });
         // await synth.prime();
       } catch (error) {
@@ -67,15 +55,10 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
     })
   );
 
-  // const handleButtonClick = () => control.play();
+  // const handlePlayButtonToggle = () => synthControl.play();
 
   return (
     <section class="na-layout overflow-x-hidden overflow-y-auto relative">
-      {/*
-        <button onClick={handleButtonClick}>
-          {isPlaying[0]() ? '⏸' : '⏯️' // ▶️}
-        </button>
-      */}
       <main
         ref={staff}
         class="na-layout-content flex justify-around overflow-unset!"

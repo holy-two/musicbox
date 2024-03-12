@@ -1,5 +1,4 @@
 import abcjs from "abcjs";
-import { Signal } from "solid-js";
 
 function positionCursor(
   cursor: Element,
@@ -14,24 +13,14 @@ function positionCursor(
   cursor?.setAttribute?.("y2", y2.toString());
 }
 
-class CursorControl implements abcjs.CursorControl {
+export default class CursorControl implements abcjs.CursorControl {
   staff: Element;
   lastSvg: SVGSVGElement | null;
   beatSubdivisions: 2;
-  isPlaying: boolean;
 
-  constructor(
-    staff: Element,
-    flags: {
-      isPlaying: Signal<boolean>;
-    }
-  ) {
+  constructor(staff: Element) {
     this.staff = staff;
     this.lastSvg = null;
-    Object.defineProperty(this, "isPlaying", {
-      get: flags.isPlaying[0],
-      set: flags.isPlaying[1],
-    });
   }
 
   onStart() {
@@ -52,7 +41,6 @@ class CursorControl implements abcjs.CursorControl {
       }
     });
     this.lastSvg = null;
-    this.isPlaying = true;
   }
 
   onEvent(event: abcjs.NoteTimingEvent) {
@@ -101,8 +89,7 @@ class CursorControl implements abcjs.CursorControl {
     }
     const cursor = this.staff.querySelector("svg .abcjs-cursor");
     positionCursor(cursor, 0, 0, 0, 0);
-    this.isPlaying = false;
   }
-}
 
-export default CursorControl;
+  // onBeat() {}
+}

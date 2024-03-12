@@ -1,5 +1,5 @@
 import { Show, For, createSignal } from "solid-js";
-import { ListFile } from "𝄞/type";
+import { ListFile } from "𝄞/types";
 
 const getFileName = (path: string) => path.match(/\/(.*?).abc$/)?.at(-1);
 const [getCurrentName, setCurrentName] = createSignal<string>("index");
