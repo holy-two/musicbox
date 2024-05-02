@@ -1,4 +1,4 @@
-import { Show, For, createSignal } from "solid-js";
+import { Show, For, createSignal, createMemo } from "solid-js";
 import { ListFile } from "𝄞/types";
 
 const getFileName = (path: string) => path.match(/\/(.*?).abc$/)?.at(-1);
@@ -12,23 +12,30 @@ const CustomMenu = (props: {
     <Show when={props.files.length > 0}>
       <ul class="na-menu">
         <For each={props.files}>
-          {(item) => (
-            <li
-              class="na-menu-item cursor-pointer"
-              style={{ order: getFileName(item.path) === "index" ? -1 : 1 }}
-              {...(getFileName(item.path) === getCurrentName()
-                ? {
-                    "data-selected": "",
-                  }
-                : {})}
-              onClick={() => {
-                setCurrentName(getFileName(item.path));
-                props.onclick(item);
-              }}
-            >
-              {getFileName(item.path)}
-            </li>
-          )}
+          {(item) => {
+            const name = getFileName(item.path);
+            const getIsCurrent = createMemo(() => name === getCurrentName());
+            return (
+              <li
+                classList={{
+                  "na-menu-item": true,
+                  "cursor-pointer": !getIsCurrent(),
+                }}
+                style={{ order: name === "index" ? -1 : 1 }}
+                {...(getIsCurrent()
+                  ? {
+                      "data-selected": "",
+                    }
+                  : {})}
+                onClick={() => {
+                  setCurrentName(name);
+                  props.onclick(item);
+                }}
+              >
+                {name}
+              </li>
+            );
+          }}
         </For>
       </ul>
     </Show>
