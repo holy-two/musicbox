@@ -1,5 +1,8 @@
 import { sleep } from "𝄞/utils";
 
+const innerHTML = (content: string) =>
+  `<div class="na-message"><p class="na-paragraph">${content}</p></div>`;
+
 export class Launcher {
   private queue: HTMLDivElement;
   constructor(parentElement: HTMLElement = document.body) {
@@ -40,11 +43,7 @@ export class Launcher {
       style = content.style ?? {};
       content = `${content.content ?? "☘"}`;
     }
-    msg.innerHTML = `
-      <div class="na-message">
-        <p class="na-paragraph">${content}</p>
-      </div>
-    `;
+    msg.innerHTML = innerHTML(content);
     if (primary) {
       const p = msg.firstElementChild as HTMLDivElement;
       p.dataset.primary = primary;

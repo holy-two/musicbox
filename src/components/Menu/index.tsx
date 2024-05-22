@@ -2,7 +2,9 @@ import { Show, For, createSignal, createMemo } from "solid-js";
 import { ListFile } from "𝄞/types";
 
 const getFileName = (path: string) => path.match(/\/(.*?).abc$/)?.at(-1);
-const [getCurrentName, setCurrentName] = createSignal<string>("index");
+const [getCurrentName, setCurrentName] = createSignal<string>(
+  import.meta.env.VITE_INDEX_ABC_NAME
+);
 
 const CustomMenu = (props: {
   files: ListFile[];
@@ -21,7 +23,9 @@ const CustomMenu = (props: {
                   "na-menu-item": true,
                   "cursor-pointer": !getIsCurrent(),
                 }}
-                style={{ order: name === "index" ? -1 : 1 }}
+                style={{
+                  order: name === import.meta.env.VITE_INDEX_ABC_NAME ? -1 : 1,
+                }}
                 {...(getIsCurrent()
                   ? {
                       "data-selected": "",
