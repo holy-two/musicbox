@@ -1,3 +1,3 @@
 interface Window {
-  readonly theme: "dark" | "light";
+  readonly theme: "dark" | "light"
 }

@@ -1,14 +1,14 @@
-import { sleep } from "𝄞/utils";
+import { sleep } from "𝄞/utils"
 
 const innerHTML = (content: string) =>
-  `<div class="na-message"><p class="na-paragraph">${content}</p></div>`;
+  `<div class="na-message"><p class="na-paragraph">${content}</p></div>`
 
 export class Launcher {
-  private queue: HTMLDivElement;
+  private queue: HTMLDivElement
   constructor(parentElement: HTMLElement = document.body) {
-    this.queue = document.createElement("div");
-    this.queue.className = `na-message-queue`;
-    parentElement.append(this.queue);
+    this.queue = document.createElement("div")
+    this.queue.className = `na-message-queue`
+    parentElement.append(this.queue)
   }
   async emit(
     detail:
@@ -17,49 +17,49 @@ export class Launcher {
           /**
            * 内容 相当于直接传string
            */
-          content?: string;
+          content?: string
           /**
            * 主题 4种 其他非空值等效于传primary
            */
-          primary?: "success" | "danger" | "warning" | "primary";
+          primary?: "success" | "danger" | "warning" | "primary"
           /**
            * 持续时间
            */
-          duration?: number;
+          duration?: number
           /**
            * 额外的样式 需要设置primary后才生效
            */
-          style?: Record<string, string>;
+          style?: Record<string, string>
         }
   ) {
-    const msg = document.createElement("div");
-    let duration: number = 2000;
-    let primary: string = "";
-    let style: Record<string, string> = {};
-    let content = detail ?? "☘";
+    const msg = document.createElement("div")
+    let duration: number = 2000
+    let primary: string = ""
+    let style: Record<string, string> = {}
+    let content = detail ?? "☘"
     if (typeof content != "string") {
-      duration = content.duration ?? 2000;
-      primary = `${content.primary ?? ""}`;
-      style = content.style ?? {};
-      content = `${content.content ?? "☘"}`;
+      duration = content.duration ?? 2000
+      primary = `${content.primary ?? ""}`
+      style = content.style ?? {}
+      content = `${content.content ?? "☘"}`
     }
-    msg.innerHTML = innerHTML(content);
+    msg.innerHTML = innerHTML(content)
     if (primary) {
-      const p = msg.firstElementChild as HTMLDivElement;
-      p.dataset.primary = primary;
-      Object.entries(style).map((x) => p.style.setProperty(...x));
+      const p = msg.firstElementChild as HTMLDivElement
+      p.dataset.primary = primary
+      Object.entries(style).map(x => p.style.setProperty(...x))
     }
-    this.queue.appendChild(msg);
-    msg.style.height = `${msg.offsetHeight}px`;
-    msg.style.transition = "opacity 1s, height 2s";
-    await sleep(duration);
-    msg.style.opacity = "0";
-    msg.style.height = "0";
-    await sleep(2000); // 2000对应 transition height 2s
-    this.queue.removeChild(msg);
+    this.queue.appendChild(msg)
+    msg.style.height = `${msg.offsetHeight}px`
+    msg.style.transition = "opacity 1s, height 2s"
+    await sleep(duration)
+    msg.style.opacity = "0"
+    msg.style.height = "0"
+    await sleep(2000) // 2000对应 transition height 2s
+    this.queue.removeChild(msg)
   }
 }
 
-const body = new Launcher();
+const body = new Launcher()
 
-export default (...args: Parameters<typeof body.emit>) => body.emit(...args);
+export default (...args: Parameters<typeof body.emit>) => body.emit(...args)

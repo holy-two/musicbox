@@ -1,9 +1,9 @@
-import ABCPlayer from "𝄞/components/Player";
-import CustomMenu from "𝄞/components/Menu";
-import ThemeToggle from "𝄞/components/ThemeToggle";
-import { ListFile, MusicFile } from "𝄞/types";
-import { useFetch } from "𝄞/hooks/useFetch";
-import { Show } from "solid-js";
+import ABCPlayer from "𝄞/components/Player"
+import CustomMenu from "𝄞/components/Menu"
+import ThemeToggle from "𝄞/components/ThemeToggle"
+import { ListFile, MusicFile } from "𝄞/types"
+import { useFetch } from "𝄞/hooks/useFetch"
+import { Show } from "solid-js"
 
 const App = () => {
   const [filesData] = useFetch<{ files: ListFile[] }, ListFile[]>(
@@ -11,17 +11,17 @@ const App = () => {
     "json",
     {
       parseFn(from) {
-        return from.files.filter((item) =>
+        return from.files.filter(item =>
           new RegExp(
             `^${import.meta.env.VITE_ABC_DIRECTORY_PATH}.*\.abc$`
           ).test(item.path)
-        );
+        )
       },
       defaultValue() {
-        return [];
+        return []
       },
     }
-  );
+  )
 
   const [musicData, { refetch }] = useFetch<MusicFile, string>(
     import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL +
@@ -31,18 +31,18 @@ const App = () => {
     "json",
     {
       parseFn(from) {
-        return from.file.contents;
+        return from.file.contents
       },
       defaultValue() {
-        return "";
+        return ""
       },
     }
-  );
+  )
 
   const handOnClick = (item: ListFile) =>
     refetch(
       `${import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL}/${item.path}`
-    );
+    )
 
   return (
     <>
@@ -54,7 +54,7 @@ const App = () => {
         <ABCPlayer getMusicData={musicData} />
       </Show>
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App

@@ -1,7 +1,7 @@
-import { AbcElem, KeySignature } from "abcjs";
+import { AbcElem, KeySignature } from "abcjs"
 
 export function sleep(time: number) {
-  return new Promise((resolve) => setTimeout(resolve, time));
+  return new Promise(resolve => setTimeout(resolve, time))
 }
 
 /**
@@ -22,14 +22,14 @@ export function name(p: AbcElem["midiPitches"][number]) {
     "A",
     "A♯",
     "B",
-  ][p.pitch % 12];
-  const LEVEL = ~~(p.pitch / 12) - 2;
-  return `${NAME}${LEVEL}`;
+  ][p.pitch % 12]
+  const LEVEL = ~~(p.pitch / 12) - 2
+  return `${NAME}${LEVEL}`
 }
 
 /**
  * 获取调号 默认大调无后缀 小调后缀m 其他为古典调式
  */
 export function key(k: KeySignature) {
-  return `${k.root}${k.mode}`;
+  return `${k.root}${k.mode}`
 }
