@@ -10,17 +10,17 @@
   "license": "MIT",
   "devDependencies": {
     "@holy-two/vite-plugin-alias": "0.0.2",
-    "@unocss/preset-attributify": "^0.58.5",
-    "@unocss/reset": "^0.58.5",
-    "sass": "^1.71.1",
+    "@unocss/preset-attributify": "^0.61.8",
+    "@unocss/reset": "^0.61.8",
+    "sass": "^1.77.8",
     "typescript": "^4.9.5",
-    "unocss": "^0.58.5",
-    "vite": "^4.5.2",
-    "vite-plugin-solid": "^2.10.1"
+    "unocss": "^0.61.8",
+    "vite": "^5.3.5",
+    "vite-plugin-solid": "^2.10.2"
   },
   "dependencies": {
-    "abcjs": "^6.3.0",
-    "nanarinostyl": "^0.3.2",
-    "solid-js": "^1.8.15"
+    "abcjs": "^6.4.1",
+    "nanarinostyl": "^0.4.3",
+    "solid-js": "^1.8.19"
   }
 }

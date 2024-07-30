@@ -27,4 +27,4 @@ VITE_INDEX_ABC_NAME = Air auf der G-Saite
 
 ## 借物
 
-GitHub API：`[unjs/ungh](https://github.com/unjs/ungh)`
+GitHub API：[unjs/ungh](https://github.com/unjs/ungh)
