@@ -1,5 +1,14 @@
 import { AbcElem, KeySignature } from "abcjs"
 
+export function pathJoin(...path: string[]) {
+  const all = [...path]
+  let final = all.pop()
+  for (const path of all.reverse()) {
+    final = path + (path.at(-1) === "/" ? final : "/" + final)
+  }
+  return final
+}
+
 export function sleep(time: number) {
   return new Promise(resolve => setTimeout(resolve, time))
 }

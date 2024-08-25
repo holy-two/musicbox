@@ -4,6 +4,7 @@ import ThemeToggle from "𝄞/components/ThemeToggle"
 import { ListFile, MusicFile } from "𝄞/types"
 import { useFetch } from "𝄞/hooks/useFetch"
 import { Show } from "solid-js"
+import { pathJoin } from "𝄞/utils"
 
 const App = () => {
   const [filesData] = useFetch<{ files: ListFile[] }, ListFile[]>(
@@ -24,10 +25,11 @@ const App = () => {
   )
 
   const [musicData, { refetch }] = useFetch<MusicFile, string>(
-    import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL +
-      import.meta.env.VITE_ABC_DIRECTORY_PATH +
-      import.meta.env.VITE_INDEX_ABC_NAME +
-      ".abc",
+    pathJoin(
+      import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL,
+      import.meta.env.VITE_ABC_DIRECTORY_PATH,
+      import.meta.env.VITE_INDEX_ABC_NAME + ".abc"
+    ),
     "json",
     {
       parseFn(from) {
@@ -41,7 +43,7 @@ const App = () => {
 
   const handOnClick = (item: ListFile) =>
     refetch(
-      `${import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL}/${item.path}`
+      pathJoin(import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL, item.path)
     )
 
   return (
