@@ -21,6 +21,7 @@ const CustomMenu = (props: {
               <li
                 classList={{
                   "na-menu-item": true,
+                  truncate: true,
                   "cursor-pointer": !getIsCurrent(),
                 }}
                 style={{

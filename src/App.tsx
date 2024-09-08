@@ -1,9 +1,10 @@
 import ABCPlayer from "𝄞/components/Player"
 import CustomMenu from "𝄞/components/Menu"
+import MenuFoldToggle from "𝄞/components/Menu/FoldToggle"
 import ThemeToggle from "𝄞/components/ThemeToggle"
 import { ListFile, MusicFile } from "𝄞/types"
 import { useFetch } from "𝄞/hooks/useFetch"
-import { Show } from "solid-js"
+import { createSignal, Show } from "solid-js"
 import { pathJoin } from "𝄞/utils"
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
     }
   )
 
-  const [musicData, { refetch }] = useFetch<MusicFile, string>(
+  const [ABCAccessor, { refetch }] = useFetch<MusicFile, string>(
     pathJoin(
       import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL,
       import.meta.env.VITE_ABC_DIRECTORY_PATH,
@@ -46,15 +47,25 @@ const App = () => {
       pathJoin(import.meta.env.VITE_ABC_GITHUB_REPOSITORY_BASE_URL, item.path)
     )
 
+  const collapsed = createSignal<boolean>(true)
+
   return (
     <>
-      <aside class="na-layout-aside na-watermark pt-1em">
+      <aside
+        class="na-layout-aside na-watermark pt-1em"
+        {...(collapsed[0]()
+          ? {
+              "data-collapsed": "",
+            }
+          : {})}
+      >
         <CustomMenu onclick={handOnClick} files={filesData()} />
-        <ThemeToggle />
       </aside>
-      <Show when={!!musicData()}>
-        <ABCPlayer getMusicData={musicData} />
+      <Show when={!!ABCAccessor()}>
+        <ABCPlayer ABCAccessor={ABCAccessor} />
       </Show>
+      <ThemeToggle />
+      <MenuFoldToggle collapsed={collapsed} />
     </>
   )
 }

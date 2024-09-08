@@ -1,18 +1,20 @@
 .button
   z-index 9
   position fixed
-  bottom 28px
+  bottom 100px
   left 16px
   display grid
   --padding-horizonal-button 16px
+  @media screen and (min-width 1024px)
+    display none
   svg
     grid-area 1 / 1 / 2 / 2
     transition opacity 0.3s
     width 24px
     height 24px
-  /:root[data-theme='light'] &
+  /aside[data-collapsed]~&
     svg:first-child
       opacity 0
-  /:root[data-theme='dark'] &
+  /aside:not([data-collapsed])~&
     svg:last-child
       opacity 0

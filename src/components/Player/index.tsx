@@ -5,7 +5,7 @@ import CursorControl from "./control"
 import { name, key } from "𝄞/utils"
 import "./index.styl"
 
-const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
+const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
   let staff: HTMLDivElement
   let paper: HTMLDivElement
   const synth = new abcjs.synth.CreateSynth()
@@ -13,7 +13,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
   let synthControl: abcjs.SynthObjectController
 
   createEffect(
-    on(props.getMusicData, async musicData => {
+    on(props.ABCAccessor, async ABCString => {
       // 暂停上一个
       synthControl?.pause?.() // synth.stop();
       /**
@@ -27,7 +27,7 @@ const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
       })
       const visual = abcjs.renderAbc(
         staff,
-        musicData, //.replace(/^\|(?=\s*$)/m, ''),
+        ABCString, //.replace(/^\|(?=\s*$)/m, ''),
         {
           scale: 1,
           clickListener: (e, t, c, a, d, event?: MouseEvent | TouchEvent) => {

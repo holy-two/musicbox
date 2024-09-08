@@ -2,23 +2,28 @@
 @import 'nanarinostyl/src/lib/font.styl'
 @import 'nanarinostyl/src/lib/primary.styl'
 @import 'nanarinostyl/src/lib/layout.styl'
+@import 'nanarinostyl/src/lib/watermark.styl'
 @import 'nanarinostyl/src/lib/components/button.styl'
 @import 'nanarinostyl/src/lib/components/message.styl'
 @import 'nanarinostyl/src/lib/components/menu.styl'
 
+body
+  overflow hidden
+  margin 0
 
-body {
-  overflow: hidden;
-  margin: 0;
+#root
+  width 100%
+  height 100vh
+  @supports (height 100dvh)
+    height 100dvh
 
-  --width-aside: 254px;
-}
-
-#root {
-  width: 100%;
-  height: 100vh;
-
-  @supports (height: 100dvh) {
-    height: 100dvh;
-  }
-}
+aside
+  --width-aside 254px
+  padding 1em 0
+  @media screen and (max-width 768px)
+    // 小於等于 ipad mini 竪屏尺寸時 菜單懸浮
+    position absolute
+  &[data-collapsed]
+    @media screen and (min-width 1024px)
+      // 大於和等於 ipad mini 橫屏尺寸時 菜單無法隱藏
+      width var(--width-aside, unset)
