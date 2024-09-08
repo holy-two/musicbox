@@ -1,12 +1,12 @@
 import type { Signal } from "solid-js"
 import unfold from "𝄞/assets/menu-unfold.svg?raw"
 import fold from "𝄞/assets/menu-fold.svg?raw"
-import classes from "./FoldToggle.module.styl"
+import classes from "./index.module.styl"
 
 const FoldToggle = (props: { collapsed: Signal<boolean> }) => {
   return (
     <button
-      class={`na-button ${classes.button}`}
+      class={`na-button ${classes["menu-fold-button"]}`}
       innerHTML={fold + unfold}
       title="menu fold toggle"
       data-round

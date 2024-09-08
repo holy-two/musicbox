@@ -7,7 +7,7 @@ import classes from "./index.module.styl"
 export default (() => {
   return (
     <button
-      class={`na-button ${classes.button}`}
+      class={`na-button ${classes["theme-button"]}`}
       innerHTML={moon + sun}
       title="theme toggle"
       data-round

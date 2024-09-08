@@ -1,7 +1,7 @@
-.button
-  z-index 9
+.theme-button
+.menu-fold-button
+  z-index 105
   position fixed
-  bottom 28px
   left 16px
   display grid
   --padding-horizonal-button 16px
@@ -10,9 +10,19 @@
     transition opacity 0.3s
     width 24px
     height 24px
+.theme-button
+  bottom 28px
   /:root[data-theme='light'] &
     svg:first-child
       opacity 0
   /:root[data-theme='dark'] &
+    svg:last-child
+      opacity 0
+.menu-fold-button
+  bottom 100px
+  /aside[data-collapsed]~&
+    svg:first-child
+      opacity 0
+  /aside:not([data-collapsed])~&
     svg:last-child
       opacity 0
