@@ -3,7 +3,7 @@ import message from "𝄞/components/Message"
 import abcjs from "abcjs"
 import CursorControl from "./control"
 import { name, key } from "𝄞/utils"
-import "./index.scss"
+import "./index.styl"
 
 const ABCPlayer = (props: { getMusicData: Accessor<string> }) => {
   let staff: HTMLDivElement

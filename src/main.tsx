@@ -4,7 +4,7 @@ import "abcjs/abcjs-audio.css"
 import App from "𝄞/App"
 import "@unocss/reset/normalize.css"
 import "uno.css"
-import "𝄞/index.scss"
+import "𝄞/index.styl"
 
 const root = document.getElementById("root")
 

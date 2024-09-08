@@ -1,0 +1,24 @@
+@import 'nanarinostyl/src/lib/variable/*'
+@import 'nanarinostyl/src/lib/font.styl'
+@import 'nanarinostyl/src/lib/primary.styl'
+@import 'nanarinostyl/src/lib/layout.styl'
+@import 'nanarinostyl/src/lib/components/button.styl'
+@import 'nanarinostyl/src/lib/components/message.styl'
+@import 'nanarinostyl/src/lib/components/menu.styl'
+
+
+body {
+  overflow: hidden;
+  margin: 0;
+
+  --width-aside: 254px;
+}
+
+#root {
+  width: 100%;
+  height: 100vh;
+
+  @supports (height: 100dvh) {
+    height: 100dvh;
+  }
+}

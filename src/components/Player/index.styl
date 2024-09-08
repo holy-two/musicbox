@@ -1,0 +1,36 @@
+@import 'nanarinostyl/src/lib/variable/*'
+
+line.abcjs-cursor
+  color rgb(var(--primary-6))
+.highlight
+  fill rgb(var(--primary-6))
+.abcjs-note_selected
+  fill rgb(var(--primary-6)) !important
+.abcjs-inline-audio
+  background-color transparent
+  overflow hidden
+  .abcjs-btn
+    g
+      fill rgb(var(--primary-6))
+      stroke rgb(var(--primary-6))
+    circle
+      stroke rgb(var(--primary-6))
+    &:hover
+      g
+        fill rgb(var(--primary-4))
+        stroke rgb(var(--primary-4))
+      circle
+        stroke rgb(var(--primary-4))
+  .abcjs-midi-progress-background
+    background-color rgb((var(--primary-1) \/ 50%))
+    border-color rgb((var(--primary-1) \/ 50%))
+    &:hover
+      border-color rgb(var(--primary-2))
+    .abcjs-midi-progress-indicator
+      background-color rgb(var(--primary-5))
+    &:active .abcjs-midi-progress-indicator
+      background-color rgb(var(--primary-3))
+  .abcjs-midi-clock
+    color rgb(var(--gray-9))
+  .abcjs-pushed ~ .abcjs-midi-clock
+    color rgb(var(--primary-6))
