@@ -36,13 +36,15 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
             abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
             e.midiPitches?.forEach?.(pitch => message(name(pitch)))
           },
+          // oneSvgPerLine: true,
+          viewportVertical: true,
+          responsive: "resize",
         }
       )
 
       try {
         const keySignature = visual?.[0]?.getKeySignature?.()
         console.info(key(keySignature), keySignature)
-        // 创建缓存和缓冲要播放的音频的对象
         await synth.init({ visualObj: visual[0] })
         await synthControl.setTune(visual[0], false, {
           chordsOff: true,
@@ -61,7 +63,7 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
     <section class="na-layout overflow-x-hidden overflow-y-auto relative">
       <main
         ref={staff}
-        class="na-layout-content flex justify-around overflow-unset!"
+        class="na-layout-content overflow-unset! min-w-375px" /* 最小是 iPhone SE 寬度 */
       />
       <footer ref={paper} class="na-layout-footer bottom-0 sticky" />
     </section>
