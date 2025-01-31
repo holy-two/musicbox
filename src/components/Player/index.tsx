@@ -63,7 +63,7 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
     <section class="na-layout overflow-x-hidden overflow-y-auto relative">
       <main
         ref={staff}
-        class="na-layout-content overflow-unset! min-w-375px" /* 最小是 iPhone SE 寬度 */
+        class="na-layout-content overflow-unset!"
       />
       <footer ref={paper} class="na-layout-footer bottom-0 sticky" />
     </section>
