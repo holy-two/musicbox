@@ -1,8 +1,7 @@
-import { Accessor, createEffect, on } from "solid-js"
-import message from "𝄞/components/Message"
+import { Accessor, createEffect, on, onCleanup } from "solid-js"
 import abcjs from "abcjs"
 import CursorControl from "./control"
-import { name, key } from "𝄞/utils"
+import { key, strike } from "𝄞/utils"
 import "./index.styl"
 
 const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
@@ -11,6 +10,7 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
   const synth = new abcjs.synth.CreateSynth()
   let cursorControl: abcjs.CursorControl
   let synthControl: abcjs.SynthObjectController
+  let visual: abcjs.TuneObjectArray
 
   createEffect(
     on(props.ABCAccessor, async ABCString => {
@@ -25,16 +25,16 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
         displayPlay: true,
         displayProgress: true,
       })
-      const visual = abcjs.renderAbc(
+      visual = abcjs.renderAbc(
         staff,
         ABCString, //.replace(/^\|(?=\s*$)/m, ''),
         {
           scale: 1,
           clickListener: (e, t, c, a, d, event?: MouseEvent | TouchEvent) => {
+            // e === visual[0].engraver?.dragTarget?.absEl?.abcelem 会缓存上一次的e
             if (event.type !== "mouseup") return
             if (e.rest) return
-            abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
-            e.midiPitches?.forEach?.(pitch => message(name(pitch)))
+            strike(e)
           },
           // oneSvgPerLine: true,
           viewportVertical: true,
@@ -59,12 +59,25 @@ const ABCPlayer = (props: { ABCAccessor: Accessor<string> }) => {
 
   // const handlePlayButtonToggle = () => synthControl.play();
 
+  function handleNoteKeyup(e: KeyboardEvent) {
+    if (document.activeElement == document.body) {
+      if (e.key === "Enter" && visual[0].engraver.selected.length) {
+        const g: abcjs.AbsoluteElement = visual[0].engraver.selected[0]
+        if (g.type === "note") strike(g.abcelem)
+        g.elemset?.[0]?.scrollIntoView?.({
+          behavior: "smooth",
+          block: "center",
+        })
+      }
+    }
+  }
+
+  window.addEventListener("keyup", handleNoteKeyup)
+  onCleanup(() => window.removeEventListener("keyup", handleNoteKeyup))
+
   return (
     <section class="na-layout overflow-x-hidden overflow-y-auto relative">
-      <main
-        ref={staff}
-        class="na-layout-content overflow-unset!"
-      />
+      <main ref={staff} class="na-layout-content overflow-unset! select-none" />
       <footer ref={paper} class="na-layout-footer bottom-0 sticky" />
     </section>
   )

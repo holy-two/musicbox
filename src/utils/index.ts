@@ -1,4 +1,5 @@
-import { AbcElem, KeySignature } from "abcjs"
+import abcjs from "abcjs"
+import message from "𝄞/components/Message"
 
 export function pathJoin(...path: string[]) {
   const all = [...path]
@@ -17,7 +18,7 @@ export function sleep(time: number) {
  * 获取绝对音名
  * `NAME = C, LEVEL = 6` 表示 小字2组C 即软件库乐队里的C4
  */
-export function name(p: AbcElem["midiPitches"][number]) {
+export function name(p: abcjs.AbcElem["midiPitches"][number]) {
   const NAME = [
     "C",
     "C♯",
@@ -39,6 +40,19 @@ export function name(p: AbcElem["midiPitches"][number]) {
 /**
  * 获取调号 默认大调无后缀 小调后缀m 其他为古典调式
  */
-export function key(k: KeySignature) {
+export function key(k: abcjs.KeySignature) {
   return `${k.root}${k.mode}`
+}
+
+/**
+ * 播放一拍
+ */
+export async function strike(e: abcjs.AbcElem) {
+  abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
+  return message(
+    e.midiPitches
+      ?.map?.(pitch => name(pitch))
+      .join(" ")
+      .trim() || "⌒"
+  )
 }
