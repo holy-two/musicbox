@@ -1,9 +1,25 @@
 @require 'nanarinostyl/lib/mixins/*'
 @import 'nanarinostyl/lib/variables/*'
-@import 'nanarinostyl/lib/font.styl'
-@import 'nanarinostyl/lib/primary.styl'
-@import 'nanarinostyl/lib/layout.styl'
-@import 'nanarinostyl/lib/watermark.styl'
+@require 'nanarinostyl/lib/common/*'
+// custom primary
+color_alias_dict = {
+  primary: 'magenta',
+  success: 'green',
+  danger: 'red',
+  warning: 'orange'
+}
+:root
+  for k, v in color_alias_dict
+    for i in range(1 10)
+      {_get_var_by(k, i)} var(_get_var_by(v, i))
+
+    if k != 'primary'
+      [data-primary={k}]
+        for i in range(1 10)
+          {_get_var_by('primary', i)} var(_get_var_by(k, i))
+
+  --outline-color-focus var(--black)
+
 @import 'nanarinostyl/lib/components/button.styl'
 @import 'nanarinostyl/lib/components/message.styl'
 @import 'nanarinostyl/lib/components/menu.styl'

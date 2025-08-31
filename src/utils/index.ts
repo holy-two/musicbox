@@ -49,10 +49,12 @@ export function key(k: abcjs.KeySignature) {
  */
 export async function strike(e: abcjs.AbcElem) {
   abcjs.synth.playEvent(e.midiPitches, undefined, 1000)
-  return message(
-    e.midiPitches
-      ?.map?.(pitch => name(pitch))
-      .join(" ")
-      .trim() || "⌒"
-  )
+  return message({
+    content:
+      e.midiPitches
+        ?.map?.(pitch => name(pitch))
+        .join(" ")
+        .trim() || "⌒",
+    primary: true,
+  })
 }

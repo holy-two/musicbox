@@ -31,15 +31,18 @@ const App = () => {
       import.meta.env.VITE_ABC_DIRECTORY_PATH,
       import.meta.env.VITE_INDEX_ABC_NAME + ".abc"
     ),
-    "json",
-    {
-      parseFn(from) {
-        return from.file.contents
-      },
-      defaultValue() {
-        return ""
-      },
-    }
+    // @ts-ignore
+    import.meta.env.VITE_ABC_GITHUB_FILE_REDIRECT ? "text" : "json",
+    import.meta.env.VITE_ABC_GITHUB_FILE_REDIRECT
+      ? {}
+      : {
+          parseFn(from) {
+            return from.file.contents
+          },
+          defaultValue() {
+            return ""
+          },
+        }
   )
 
   const handOnClick = (item: ListFile) =>

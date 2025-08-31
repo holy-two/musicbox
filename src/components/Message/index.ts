@@ -21,7 +21,7 @@ export class Launcher {
           /**
            * 主题 4种 其他非空值等效于传primary
            */
-          primary?: "success" | "danger" | "warning" | "primary"
+          primary?: "success" | "danger" | "warning" | boolean
           /**
            * 持续时间
            */
@@ -39,7 +39,7 @@ export class Launcher {
     let content = detail ?? "☘"
     if (typeof content != "string") {
       duration = content.duration ?? 2000
-      primary = `${content.primary ?? ""}`
+      primary = `${content.primary || ""}`
       style = content.style ?? {}
       content = `${content.content ?? "☘"}`
     }
