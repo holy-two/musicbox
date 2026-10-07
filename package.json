@@ -10,21 +10,21 @@
   },
   "license": "MIT",
   "devDependencies": {
-    "@holy-two/vite-plugin-alias": "0.0.2",
-    "@unocss/preset-attributify": "^66.5.0",
-    "@unocss/reset": "^66.5.0",
+    "@holy-two/vite-plugin-alias": "0.1.1",
+    "@unocss/preset-attributify": "^66.10.5",
+    "@unocss/reset": "^66.10.5",
     "stylus": "^0.64.0",
-    "typescript": "^5.9.2",
-    "unocss": "^66.5.0",
-    "vite": "^6.3.5",
+    "typescript": "^5.9.3",
+    "unocss": "^66.10.5",
+    "vite": "^7.3.7",
     "vite-plugin-insert-html": "^1.0.3",
-    "vite-plugin-solid": "^2.11.8"
+    "vite-plugin-solid": "^2.11.14"
   },
   "dependencies": {
     "@holy-two/data-theme": "^0.0.7",
-    "abcjs": "^6.5.2",
-    "nanarinostyl": "^0.12.2",
-    "solid-js": "^1.9.9"
+    "@nanarino/stylus": "^2.0.0",
+    "abcjs": "^6.7.1",
+    "solid-js": "^1.9.16"
   },
   "pnpm": {
     "overrides": {
